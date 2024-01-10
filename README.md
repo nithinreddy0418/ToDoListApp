@@ -26,19 +26,14 @@ The ToDoList app is designed to help you keep track of your tasks and manage you
 
 1. **Due Date:**
    - Assign a due date to each task for better time management.
-
 2. **Priority Levels:**
    - Set priority levels (Low, Medium, High) to organize tasks by importance.
-
 3. **Category:**
    - Categorize tasks to group them based on common themes or projects.
-
 4. **Task Status:**
    - Track task status (New, In Progress, Completed) to monitor progress.
-
 5. **Title and Description:**
    - Provide a title and detailed description for each task.
-
 6. **Local Storage:**
    - Utilizes Room Database for efficient and secure local storage of tasks.
 
@@ -65,6 +60,18 @@ The ToDoList app is designed to help you keep track of your tasks and manage you
 
 - Open the project in Android Studio.
 - Build and run the app on your emulator or device.
+ ## Todo List
+<code>+</code> Add task
+
+<code>+</code> Remove task
+
+<code>+</code> List completed task
+
+<code>+</code> List not completed task
+
+<code>+</code> Set clock task time
+
+<code>+</code> View task statistics by date
 
 
 
