@@ -1,0 +1,185 @@
+\hypertarget{classcom_1_1example_1_1todolist_1_1_model_1_1home_1_1_home_fragment}{}\doxysection{com.\+example.\+todolist.\+Model.\+home.\+Home\+Fragment Class Reference}
+\label{classcom_1_1example_1_1todolist_1_1_model_1_1home_1_1_home_fragment}\index{com.example.todolist.Model.home.HomeFragment@{com.example.todolist.Model.home.HomeFragment}}
+
+
+The default activity Fragment that displays the list of To-\/\+Do tasks.  
+
+
+Inheritance diagram for com.\+example.\+todolist.\+Model.\+home.\+Home\+Fragment\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=1.879195cm]{classcom_1_1example_1_1todolist_1_1_model_1_1home_1_1_home_fragment}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+View \mbox{\hyperlink{classcom_1_1example_1_1todolist_1_1_model_1_1home_1_1_home_fragment_a6794b3ffd28b4153f33a4af0f2e9664a}{on\+Create\+View}} (@Non\+Null Layout\+Inflater inflater, View\+Group container, Bundle saved\+Instance\+State)
+\begin{DoxyCompactList}\small\item\em Called to have the fragment instantiate its user interface view. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1todolist_1_1_model_1_1home_1_1_home_fragment_a50dce78f45d88d16da4b19f10d1a6703}{on\+Create}} (@Nullable Bundle saved\+Instance\+State)
+\begin{DoxyCompactList}\small\item\em called on initial creation of the fragment. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcom_1_1example_1_1todolist_1_1_model_1_1home_1_1_home_fragment_a364237f8fdccf9e87cdf6ffda593d095}\label{classcom_1_1example_1_1todolist_1_1_model_1_1home_1_1_home_fragment_a364237f8fdccf9e87cdf6ffda593d095}} 
+void {\bfseries on\+Start} ()
+\begin{DoxyCompactList}\small\item\em called when the fragment returns to the foreground \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1todolist_1_1_model_1_1home_1_1_home_fragment_a13093b6d1564f1d1a7685a4bd02acdb7}{add\+To\+Recycler}} (\mbox{\hyperlink{classcom_1_1example_1_1todolist_1_1_model_1_1_task}{Task}} task)
+\begin{DoxyCompactList}\small\item\em Called to add a task to the database and update the Recycler\+View. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1todolist_1_1_model_1_1home_1_1_home_fragment_abb1d19ca0021502ac43964bd21a2260b}{remove\+From\+Recycler}} (\mbox{\hyperlink{classcom_1_1example_1_1todolist_1_1_model_1_1_task}{Task}} task)
+\begin{DoxyCompactList}\small\item\em Called to remove a task from the database and update the Recycler\+View. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1todolist_1_1_model_1_1home_1_1_home_fragment_a6ad97ef8dd14cdaa6a8cad4550956a21}{recycler}} ()
+\begin{DoxyCompactList}\small\item\em Called to refresh the Recycler\+View. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1todolist_1_1_model_1_1home_1_1_home_fragment_af2a9b8db3066f0d2b19473631b463bb2}{set\+Recycler\+Visibility}} ()
+\begin{DoxyCompactList}\small\item\em This method sets the visibility of the Recycler\+View. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{classcom_1_1example_1_1todolist_1_1_model_1_1home_1_1_home_fragment_ac950e0c8e632ef62e706d2b418ad97d1}\label{classcom_1_1example_1_1todolist_1_1_model_1_1home_1_1_home_fragment_ac950e0c8e632ef62e706d2b418ad97d1}} 
+void {\bfseries on\+Destroy\+View} ()
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1todolist_1_1_model_1_1home_1_1_home_fragment_af354743865477511d3ec8b38c1ab2cc4}{on\+Item\+Clicked}} (\mbox{\hyperlink{classcom_1_1example_1_1todolist_1_1_model_1_1_task}{Task}} task)
+\begin{DoxyCompactList}\small\item\em Called when the user selects a task\+\_\+container from the Recycler\+View. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{interfacecom_1_1example_1_1todolist_1_1ui_1_1home_1_1_select_listener_a92d6664a616dd575cce35e76a6fb306f}{on\+Item\+Clicked}} (\mbox{\hyperlink{classcom_1_1example_1_1todolist_1_1_model_1_1_task}{Task}} task)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The default activity Fragment that displays the list of To-\/\+Do tasks. 
+
+\begin{DoxyAuthor}{Author}
+Jay Stewart, Bryce Mc\+Nary, Marwa Qureshi 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxySeeAlso}{See also}
+android.\+app.\+Fragment 
+\end{DoxySeeAlso}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classcom_1_1example_1_1todolist_1_1_model_1_1home_1_1_home_fragment_a13093b6d1564f1d1a7685a4bd02acdb7}\label{classcom_1_1example_1_1todolist_1_1_model_1_1home_1_1_home_fragment_a13093b6d1564f1d1a7685a4bd02acdb7}} 
+\index{com.example.todolist.Model.home.HomeFragment@{com.example.todolist.Model.home.HomeFragment}!addToRecycler@{addToRecycler}}
+\index{addToRecycler@{addToRecycler}!com.example.todolist.Model.home.HomeFragment@{com.example.todolist.Model.home.HomeFragment}}
+\doxysubsubsection{\texorpdfstring{addToRecycler()}{addToRecycler()}}
+{\footnotesize\ttfamily void com.\+example.\+todolist.\+Model.\+home.\+Home\+Fragment.\+add\+To\+Recycler (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcom_1_1example_1_1todolist_1_1_model_1_1_task}{Task}}}]{task }\end{DoxyParamCaption})}
+
+
+
+Called to add a task to the database and update the Recycler\+View. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em task} & a Task \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+updated Recycler\+View 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcom_1_1example_1_1todolist_1_1_model_1_1home_1_1_home_fragment_a50dce78f45d88d16da4b19f10d1a6703}\label{classcom_1_1example_1_1todolist_1_1_model_1_1home_1_1_home_fragment_a50dce78f45d88d16da4b19f10d1a6703}} 
+\index{com.example.todolist.Model.home.HomeFragment@{com.example.todolist.Model.home.HomeFragment}!onCreate@{onCreate}}
+\index{onCreate@{onCreate}!com.example.todolist.Model.home.HomeFragment@{com.example.todolist.Model.home.HomeFragment}}
+\doxysubsubsection{\texorpdfstring{onCreate()}{onCreate()}}
+{\footnotesize\ttfamily void com.\+example.\+todolist.\+Model.\+home.\+Home\+Fragment.\+on\+Create (\begin{DoxyParamCaption}\item[{@Nullable Bundle}]{saved\+Instance\+State }\end{DoxyParamCaption})}
+
+
+
+called on initial creation of the fragment. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em saved\+Instance\+State} & If the fragment is being re-\/created from a previous saved state, this is the state. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcom_1_1example_1_1todolist_1_1_model_1_1home_1_1_home_fragment_a6794b3ffd28b4153f33a4af0f2e9664a}\label{classcom_1_1example_1_1todolist_1_1_model_1_1home_1_1_home_fragment_a6794b3ffd28b4153f33a4af0f2e9664a}} 
+\index{com.example.todolist.Model.home.HomeFragment@{com.example.todolist.Model.home.HomeFragment}!onCreateView@{onCreateView}}
+\index{onCreateView@{onCreateView}!com.example.todolist.Model.home.HomeFragment@{com.example.todolist.Model.home.HomeFragment}}
+\doxysubsubsection{\texorpdfstring{onCreateView()}{onCreateView()}}
+{\footnotesize\ttfamily View com.\+example.\+todolist.\+Model.\+home.\+Home\+Fragment.\+on\+Create\+View (\begin{DoxyParamCaption}\item[{@Non\+Null Layout\+Inflater}]{inflater,  }\item[{View\+Group}]{container,  }\item[{Bundle}]{saved\+Instance\+State }\end{DoxyParamCaption})}
+
+
+
+Called to have the fragment instantiate its user interface view. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em inflater} & The Layout\+Inflater object that can be used to inflate any views in the fragment, \\
+\hline
+{\em container} & If non-\/null, this is the parent view that the fragment\textquotesingle{}s UI should be attached to. The fragment should not add the view itself, but this can be used to generate the Layout\+Params of the view. \\
+\hline
+{\em saved\+Instance\+State} & If non-\/null, this fragment is being re-\/constructed from a previous saved state as given here.\\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Return the View for the fragment\textquotesingle{}s UI, or null. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcom_1_1example_1_1todolist_1_1_model_1_1home_1_1_home_fragment_af354743865477511d3ec8b38c1ab2cc4}\label{classcom_1_1example_1_1todolist_1_1_model_1_1home_1_1_home_fragment_af354743865477511d3ec8b38c1ab2cc4}} 
+\index{com.example.todolist.Model.home.HomeFragment@{com.example.todolist.Model.home.HomeFragment}!onItemClicked@{onItemClicked}}
+\index{onItemClicked@{onItemClicked}!com.example.todolist.Model.home.HomeFragment@{com.example.todolist.Model.home.HomeFragment}}
+\doxysubsubsection{\texorpdfstring{onItemClicked()}{onItemClicked()}}
+{\footnotesize\ttfamily void com.\+example.\+todolist.\+Model.\+home.\+Home\+Fragment.\+on\+Item\+Clicked (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcom_1_1example_1_1todolist_1_1_model_1_1_task}{Task}}}]{task }\end{DoxyParamCaption})}
+
+
+
+Called when the user selects a task\+\_\+container from the Recycler\+View. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em task} & a Task Selected \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+a bottom\+\_\+sheet\+\_\+dialog for the selected Task 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{interfacecom_1_1example_1_1todolist_1_1ui_1_1home_1_1_select_listener}{com.\+example.\+todolist.\+ui.\+home.\+Select\+Listener}}.
+
+\mbox{\Hypertarget{classcom_1_1example_1_1todolist_1_1_model_1_1home_1_1_home_fragment_a6ad97ef8dd14cdaa6a8cad4550956a21}\label{classcom_1_1example_1_1todolist_1_1_model_1_1home_1_1_home_fragment_a6ad97ef8dd14cdaa6a8cad4550956a21}} 
+\index{com.example.todolist.Model.home.HomeFragment@{com.example.todolist.Model.home.HomeFragment}!recycler@{recycler}}
+\index{recycler@{recycler}!com.example.todolist.Model.home.HomeFragment@{com.example.todolist.Model.home.HomeFragment}}
+\doxysubsubsection{\texorpdfstring{recycler()}{recycler()}}
+{\footnotesize\ttfamily void com.\+example.\+todolist.\+Model.\+home.\+Home\+Fragment.\+recycler (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Called to refresh the Recycler\+View. 
+
+\begin{DoxyReturn}{Returns}
+updated Recycler\+View 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcom_1_1example_1_1todolist_1_1_model_1_1home_1_1_home_fragment_abb1d19ca0021502ac43964bd21a2260b}\label{classcom_1_1example_1_1todolist_1_1_model_1_1home_1_1_home_fragment_abb1d19ca0021502ac43964bd21a2260b}} 
+\index{com.example.todolist.Model.home.HomeFragment@{com.example.todolist.Model.home.HomeFragment}!removeFromRecycler@{removeFromRecycler}}
+\index{removeFromRecycler@{removeFromRecycler}!com.example.todolist.Model.home.HomeFragment@{com.example.todolist.Model.home.HomeFragment}}
+\doxysubsubsection{\texorpdfstring{removeFromRecycler()}{removeFromRecycler()}}
+{\footnotesize\ttfamily void com.\+example.\+todolist.\+Model.\+home.\+Home\+Fragment.\+remove\+From\+Recycler (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcom_1_1example_1_1todolist_1_1_model_1_1_task}{Task}}}]{task }\end{DoxyParamCaption})}
+
+
+
+Called to remove a task from the database and update the Recycler\+View. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em task} & a Task \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+updated Recycler\+View 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcom_1_1example_1_1todolist_1_1_model_1_1home_1_1_home_fragment_af2a9b8db3066f0d2b19473631b463bb2}\label{classcom_1_1example_1_1todolist_1_1_model_1_1home_1_1_home_fragment_af2a9b8db3066f0d2b19473631b463bb2}} 
+\index{com.example.todolist.Model.home.HomeFragment@{com.example.todolist.Model.home.HomeFragment}!setRecyclerVisibility@{setRecyclerVisibility}}
+\index{setRecyclerVisibility@{setRecyclerVisibility}!com.example.todolist.Model.home.HomeFragment@{com.example.todolist.Model.home.HomeFragment}}
+\doxysubsubsection{\texorpdfstring{setRecyclerVisibility()}{setRecyclerVisibility()}}
+{\footnotesize\ttfamily void com.\+example.\+todolist.\+Model.\+home.\+Home\+Fragment.\+set\+Recycler\+Visibility (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+This method sets the visibility of the Recycler\+View. 
+
+Sets the Recycler\+View VISIBLE if the database is storing tasks WHERE is\+Complete = 0, otherwise sets the Recycler\+View INVISIBLE and the Text\+View is set VISIBLE 
+
+\begin{DoxySeeAlso}{See also}
+View 
+\end{DoxySeeAlso}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+main/java/com/example/todolist/\+Model/home/Home\+Fragment.\+java\end{DoxyCompactItemize}

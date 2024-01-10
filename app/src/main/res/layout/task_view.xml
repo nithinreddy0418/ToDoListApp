@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="7dp"
+    android:layout_marginLeft="7dp"
+    android:layout_marginRight="10dp"
+    card_view:cardCornerRadius="15dp">
+
+<RelativeLayout
+    android:id="@+id/task_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/light_blue"
+    >
+
+    <ImageView
+        android:id="@+id/taskImage"
+        android:layout_width="48dp"
+        android:layout_height="60dp"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp" />
+
+    <TextView
+        android:id="@+id/taskName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="1dp"
+        android:layout_toEndOf="@+id/taskImage"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        tools:text="TaskName" />
+
+    <TextView
+        android:id="@+id/taskDesc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/taskName"
+        android:layout_toEndOf="@id/taskImage"
+        android:textSize="20sp"
+        tools:text="TaskDesc" />
+
+    <TextView
+        android:id="@+id/taskDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/taskDesc"
+        android:layout_toEndOf="@id/taskImage"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        tools:text="TaskDate" />
+
+
+    <TextView
+        android:id="@+id/isComplete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/taskDate"
+        android:layout_toEndOf="@+id/taskImage"
+        android:textColor="@color/gray"
+        android:textSize="20sp"
+        tools:text="isComplete" />
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

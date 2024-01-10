@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>HomeFragment.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=0;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">debug</a> &gt; <a href="index.source.html" class="el_package">com.example.todolist.Model.home</a> &gt; <span class="el_source">HomeFragment.java</span></div><h1>HomeFragment.java</h1><pre class="source lang-java linenums">package com.example.todolist.Model.home;
+
+import android.Manifest;
+import android.app.Dialog;
+import android.app.Notification;
+import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.todolist.MainActivity;
+import com.example.todolist.Model.AppDatabase;
+import com.example.todolist.Model.Notifications;
+import com.example.todolist.Model.Task;
+import com.example.todolist.Model.TaskDao;
+import com.example.todolist.R;
+import com.example.todolist.databinding.FragmentHomeBinding;
+import com.example.todolist.ui.home.SelectListener;
+import com.google.android.material.snackbar.Snackbar;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.List;
+import java.util.TimeZone;
+
+/**
+ * The default activity Fragment that displays the list of To-Do tasks
+ * @author Jay Stewart, Bryce McNary, Marwa Qureshi
+ * @version 1.0
+ * @see android.app.Fragment
+ */
+<span class="fc" id="L61">public class HomeFragment extends Fragment implements SelectListener {</span>
+
+    AppDatabase db;
+    TaskDao taskDao;
+
+    private FragmentHomeBinding binding;
+
+    /**
+     * Called to have the fragment instantiate its user interface view.
+     * @param inflater The LayoutInflater object that can be used to inflate
+     * any views in the fragment,
+     * @param container If non-null, this is the parent view that the fragment's
+     * UI should be attached to.  The fragment should not add the view itself,
+     * but this can be used to generate the LayoutParams of the view.
+     * @param savedInstanceState If non-null, this fragment is being re-constructed
+     * from a previous saved state as given here.
+     *
+     * @return Return the View for the fragment's UI, or null.
+     */
+    public View onCreateView(@NonNull LayoutInflater inflater,
+                             ViewGroup container, Bundle savedInstanceState) {
+<span class="fc" id="L82">        HomeViewModel homeViewModel =</span>
+<span class="fc" id="L83">                new ViewModelProvider(this).get(HomeViewModel.class);</span>
+
+<span class="fc" id="L85">        binding = FragmentHomeBinding.inflate(inflater, container, false);</span>
+
+<span class="fc" id="L87">        return binding.getRoot();</span>
+    }
+
+    /**
+     * called on initial creation of the fragment.
+     * @param savedInstanceState If the fragment is being re-created from
+     * a previous saved state, this is the state.
+     */
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+<span class="fc" id="L97">        super.onCreate(savedInstanceState);</span>
+<span class="fc" id="L98">    }</span>
+
+    /**
+     * called when the fragment returns to the foreground
+     */
+    @Override
+    public void onStart() {
+<span class="fc" id="L105">        super.onStart();</span>
+<span class="fc" id="L106">        db = MainActivity.db;</span>
+<span class="fc" id="L107">        taskDao = db.taskDao();</span>
+<span class="fc" id="L108">        taskDao.insert(new Task(1, R.drawable.baseline_priority_high_24, false,</span>
+                &quot;Test 1&quot;,
+                &quot;Description&quot;,
+                &quot;08/31/2023&quot;));
+<span class="fc" id="L112">        taskDao.insert(new Task(2, R.drawable.baseline_priority_high_24, false,</span>
+                &quot;Test 2&quot;,
+                &quot;Description&quot;,
+                &quot;08/31/2023&quot;));
+<span class="fc" id="L116">        taskDao.insert(new Task(3, R.drawable.baseline_priority_high_24, true,</span>
+                &quot;Test 3&quot;,
+                &quot;Description&quot;,
+                &quot;08/31/2023&quot;));
+<span class="fc" id="L120">        taskDao.insert(new Task(4, R.drawable.baseline_priority_high_24, true,</span>
+                &quot;Test 4&quot;,
+                &quot;Description&quot;,
+                &quot;08/31/2023&quot;));
+<span class="fc" id="L124">        recycler();</span>
+<span class="fc" id="L125">        setRecyclerVisibility();</span>
+<span class="fc" id="L126">    }</span>
+
+    /**
+     * Called to add a task to the database and update the RecyclerView
+     * @param task a Task
+     * @return updated RecyclerView
+     */
+    public void addToRecycler(Task task) {
+<span class="fc" id="L134">        taskDao.insert(task);</span>
+<span class="fc" id="L135">        recycler();</span>
+<span class="fc" id="L136">        setRecyclerVisibility();</span>
+<span class="fc" id="L137">    }</span>
+
+    /**
+     * Called to remove a task from the database and update the RecyclerView
+     * @param task a Task
+     * @return updated RecyclerView
+     */
+    public void removeFromRecycler(Task task){
+<span class="fc" id="L145">        taskDao.delete(task);</span>
+<span class="fc" id="L146">        recycler();</span>
+<span class="fc" id="L147">        setRecyclerVisibility();</span>
+<span class="fc" id="L148">    }</span>
+
+    /**
+     * Called to refresh the RecyclerView
+     * @return updated RecyclerView
+     */
+    public void recycler() {
+<span class="fc" id="L155">        RecyclerView recyclerView = getView().findViewById(R.id.recyclerView);</span>
+<span class="fc" id="L156">        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));</span>
+<span class="fc" id="L157">        List&lt;Task&gt; taskList = taskDao.getIncomplete();</span>
+<span class="fc" id="L158">        Collections.sort(taskList);</span>
+<span class="fc" id="L159">        recyclerView.setAdapter(new RecyclerAdapter(getContext(),taskList, this));</span>
+<span class="fc" id="L160">    }</span>
+
+    /**
+     * This method sets the visibility of the RecyclerView
+     * &lt;p&gt;
+     * Sets the RecyclerView VISIBLE if the database is storing tasks WHERE isComplete = 0,
+     * otherwise sets the RecyclerView INVISIBLE and
+     * the TextView is set VISIBLE
+     * &lt;/p&gt;
+     * @see View
+     */
+    public void setRecyclerVisibility(){
+<span class="fc" id="L172">        RecyclerView recyclerView = getView().findViewById(R.id.recyclerView);</span>
+<span class="fc" id="L173">        TextView textView = getView().findViewById(R.id.noTaskTextView);</span>
+<span class="pc bpc" id="L174" title="1 of 2 branches missed.">        if (!taskDao.getIncomplete().isEmpty()){</span>
+<span class="fc" id="L175">            recyclerView.setVisibility(View.VISIBLE);</span>
+<span class="fc" id="L176">            textView.setVisibility(View.INVISIBLE);</span>
+        } else {
+<span class="nc" id="L178">            recyclerView.setVisibility(View.INVISIBLE);</span>
+<span class="nc" id="L179">            textView.setVisibility(View.VISIBLE);</span>
+        }
+<span class="fc" id="L181">    }</span>
+
+    @Override
+    public void onDestroyView() {
+<span class="fc" id="L185">        super.onDestroyView();</span>
+<span class="fc" id="L186">        binding = null;</span>
+<span class="fc" id="L187">    }</span>
+
+    /**
+     * Called when the user selects a task_container from the RecyclerView
+     * @param task a Task Selected
+     * @return a bottom_sheet_dialog for the selected Task
+     */
+    @Override
+    //onClick listener for recycler view
+    public void onItemClicked(Task task) {
+<span class="fc" id="L197">        showBottomDialog(task);</span>
+<span class="fc" id="L198">    }</span>
+
+    /**
+     * Called to display a bottom Dialog on the screen.
+     * &lt;p&gt;
+     *     Displays the bottom_sheet_layout ContentView on the screen.
+     *     The Dialog has three choices: edit, mark as complete, delete, and create notification.
+     * &lt;/p&gt;
+     * @param task the selected Task
+     */
+    private void showBottomDialog(Task task) {
+        //declare Dialog and set dialog view to bottom_sheet_layout
+<span class="fc" id="L210">        final Dialog bottomDialog = new Dialog(getContext());</span>
+<span class="fc" id="L211">        bottomDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);</span>
+<span class="fc" id="L212">        bottomDialog.setContentView(R.layout.bottom_sheet_layout);</span>
+
+        //declare LinearLayouts from bottom_sheet_layout
+<span class="fc" id="L215">        LinearLayout markCompleteLayout = bottomDialog.findViewById(R.id.bottom_sheet_markComplete);</span>
+<span class="fc" id="L216">        LinearLayout editLayout = bottomDialog.findViewById(R.id.bottom_sheet_edit);</span>
+<span class="fc" id="L217">        LinearLayout deleteLayout = bottomDialog.findViewById(R.id.bottom_sheet_delete);</span>
+<span class="fc" id="L218">        LinearLayout notifLayout = bottomDialog.findViewById(R.id.bottom_sheet_notification);</span>
+
+        // create onClickListener for each LinearLayout
+<span class="fc" id="L221">        markCompleteLayout.setOnClickListener(new View.OnClickListener() {</span>
+            @Override
+            public void onClick(View view) {
+                // Update task to complete
+<span class="fc" id="L225">                taskDao.setComplete(task.getTaskId());</span>
+                // create Snackbar msg
+<span class="fc" id="L227">                Snackbar.make(getView(), task.getTaskName() + &quot; Marked As Complete&quot;, Snackbar.LENGTH_LONG)</span>
+<span class="fc" id="L228">                        .setAction(&quot;Undo&quot;, v -&gt; {</span>
+<span class="fc" id="L229">                            taskDao.setIncomplete(task.getTaskId());</span>
+<span class="fc" id="L230">                            recycler();</span>
+<span class="fc" id="L231">                            setRecyclerVisibility();</span>
+<span class="fc" id="L232">                        })</span>
+<span class="fc" id="L233">                        .show();</span>
+
+                // dismiss dialog and update recycler
+<span class="fc" id="L236">                recycler();</span>
+<span class="fc" id="L237">                setRecyclerVisibility();</span>
+<span class="fc" id="L238">                bottomDialog.dismiss();</span>
+<span class="fc" id="L239">            }</span>
+        });
+
+<span class="fc" id="L242">        editLayout.setOnClickListener(new View.OnClickListener() {</span>
+            @Override
+            public void onClick(View view) {
+<span class="fc" id="L245">                showEditDialog(task);</span>
+<span class="fc" id="L246">                bottomDialog.dismiss();</span>
+<span class="fc" id="L247">            }</span>
+        });
+
+<span class="fc" id="L250">        deleteLayout.setOnClickListener(new View.OnClickListener() {</span>
+            @Override
+            public void onClick(View view) {
+<span class="fc" id="L253">                showDeleteDialog(task);</span>
+<span class="fc" id="L254">                bottomDialog.dismiss();}</span>
+        });
+
+<span class="fc" id="L257">        notifLayout.setOnClickListener(new View.OnClickListener() {</span>
+            @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
+            @Override
+            public void onClick(View v) {
+<span class="nc bnc" id="L261" title="All 2 branches missed.">                if (ContextCompat.checkSelfPermission(</span>
+<span class="nc" id="L262">                        getContext(), Manifest.permission.POST_NOTIFICATIONS) ==</span>
+                        PackageManager.PERMISSION_GRANTED) {
+                    // You can use the API that requires the permission.
+                }
+                else {
+<span class="nc" id="L267">                    requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS);</span>
+                }
+
+<span class="nc" id="L270">                Notifications notifications = new Notifications();</span>
+<span class="nc" id="L271">                notifications.createNotificationChannel(getContext());</span>
+<span class="nc" id="L272">                Notification notif = notifications.createNotification(</span>
+<span class="nc" id="L273">                        task.getTaskName(),</span>
+<span class="nc" id="L274">                        task.getTaskDescription(),</span>
+                        R.drawable.baseline_notifications_24,
+<span class="nc" id="L276">                        getContext());</span>
+
+<span class="nc" id="L278">                Calendar calendar = Calendar.getInstance();</span>
+<span class="nc" id="L279">                SimpleDateFormat sdf = new SimpleDateFormat(&quot;MM/dd/yyy&quot;, Locale.ENGLISH);</span>
+                try {
+<span class="nc" id="L281">                    calendar.setTime(sdf.parse(task.getTaskDate()));</span>
+<span class="nc" id="L282">                    calendar.set(Calendar.HOUR, Calendar.HOUR);</span>
+<span class="nc" id="L283">                    calendar.set(Calendar.MINUTE, Calendar.MINUTE);</span>
+<span class="nc" id="L284">                    calendar.set(Calendar.SECOND, Calendar.SECOND + 5);</span>
+
+<span class="nc" id="L286">                } catch (ParseException e) {</span>
+<span class="nc" id="L287">                    throw new RuntimeException(e);</span>
+<span class="nc" id="L288">                }</span>
+<span class="nc" id="L289">                notifications.scheduleNotification(notif, calendar, getContext());</span>
+<span class="nc" id="L290">                bottomDialog.dismiss();</span>
+<span class="nc" id="L291">            }</span>
+        });
+
+        //start dialog and display on screen with the following settings
+<span class="fc" id="L295">        bottomDialog.show();</span>
+<span class="fc" id="L296">        bottomDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);</span>
+<span class="fc" id="L297">        bottomDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));</span>
+<span class="fc" id="L298">        bottomDialog.getWindow().setGravity(Gravity.BOTTOM);</span>
+<span class="fc" id="L299">    }</span>
+
+<span class="fc" id="L301">    private ActivityResultLauncher&lt;String&gt; requestPermissionLauncher =</span>
+<span class="fc" id="L302">            registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -&gt; {</span>
+<span class="nc" id="L303">            });</span>
+
+    /**
+     * Called to display a delete Dialog on the screen.
+     * &lt;p&gt;
+     *     Displays the delete_dialog ContentView on the screen.
+     *     The Dialog has two choices: cancel or delete.
+     * &lt;/p&gt;
+     * @param task the selected Task
+     */
+    private void showDeleteDialog(Task task){
+<span class="fc" id="L314">        final Dialog deleteDialog = new Dialog(getContext());</span>
+
+<span class="fc" id="L316">        deleteDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);</span>
+<span class="fc" id="L317">        deleteDialog.setContentView(R.layout.delete_dialog);</span>
+
+        //declare the buttons from delete_dialog
+<span class="fc" id="L320">        Button cancelButton = deleteDialog.findViewById(R.id.cancel_delete_button);</span>
+<span class="fc" id="L321">        Button deleteButton = deleteDialog.findViewById(R.id.delete_button);</span>
+
+        //start dialog and display on screen with the following settings
+<span class="fc" id="L324">        deleteDialog.show();</span>
+<span class="fc" id="L325">        deleteDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);</span>
+<span class="fc" id="L326">        deleteDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));</span>
+<span class="fc" id="L327">        deleteDialog.getWindow().setGravity(Gravity.CENTER);</span>
+<span class="fc" id="L328">        deleteDialog.setCancelable(false);</span>
+
+<span class="fc" id="L330">        cancelButton.setOnClickListener(new View.OnClickListener() {</span>
+            @Override
+            public void onClick(View view) {
+                //dismiss the dialog and remove it from the screen
+<span class="fc" id="L334">                deleteDialog.dismiss();</span>
+<span class="fc" id="L335">            }</span>
+        });
+
+<span class="fc" id="L338">        deleteButton.setOnClickListener(new View.OnClickListener() {</span>
+            @Override
+            public void onClick(View view) {
+                //remove selected task from recycler and dismiss the dialog
+<span class="fc" id="L342">                removeFromRecycler(task);</span>
+<span class="fc" id="L343">                deleteDialog.dismiss();</span>
+<span class="fc" id="L344">            }</span>
+        });
+
+<span class="fc" id="L347">    }</span>
+
+    /**
+     * Called to display an edit Dialog on the screen.
+     * &lt;p&gt;
+     *     Displays the edit_dialog ContentView on the screen.
+     *     The Dialog allows user to change task details.
+     * &lt;/p&gt;
+     * @param task the selected Task
+     */
+     private void showEditDialog(Task task){
+         //initialize the dialog
+<span class="fc" id="L359">         final Dialog editDialog = new Dialog(getContext());</span>
+<span class="fc" id="L360">         editDialog.requestWindowFeature(Window.FEATURE_NO_TITLE);</span>
+<span class="fc" id="L361">         editDialog.setContentView(R.layout.edit_dialog);</span>
+
+         //initialize everything
+<span class="fc" id="L364">         EditText taskName = editDialog.findViewById(R.id.task_name);</span>
+<span class="fc" id="L365">         EditText cDate = editDialog.findViewById(R.id.current_date);</span>
+<span class="fc" id="L366">         EditText dueDate = editDialog.findViewById(R.id.due_date);</span>
+<span class="fc" id="L367">         EditText reminder = editDialog.findViewById(R.id.reminder_time);</span>
+<span class="fc" id="L368">         EditText taskDescription = editDialog.findViewById(R.id.description_task);</span>
+<span class="fc" id="L369">         Button cancelButton = editDialog.findViewById(R.id.cancelButton);</span>
+<span class="fc" id="L370">         Button updateButton = editDialog.findViewById(R.id.update_button);</span>
+
+<span class="fc" id="L372">         cDate.setOnFocusChangeListener(new View.OnFocusChangeListener() {</span>
+             @Override
+             public void onFocusChange(View v, boolean hasFocus) {
+<span class="nc bnc" id="L375" title="All 2 branches missed.">                 if (hasFocus) {</span>
+<span class="nc" id="L376">                     cDate.setEnabled(false);</span>
+                 }
+<span class="nc" id="L378">             }</span>
+         });
+<span class="fc" id="L380">         cancelButton.setOnClickListener(new View.OnClickListener() {</span>
+             @Override
+             public void onClick(View view) {
+<span class="nc" id="L383">                 editDialog.dismiss();</span>
+<span class="nc" id="L384">             }</span>
+         });
+
+<span class="fc" id="L387">         dueDate.addTextChangedListener(new TextWatcher() {</span>
+<span class="fc" id="L388">             private String current = &quot;&quot;;</span>
+<span class="fc" id="L389">             private String mmddyyyy = &quot;MMDDYYYY&quot;;</span>
+             @Override
+<span class="fc" id="L391">             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}</span>
+
+             @Override
+             public void onTextChanged(CharSequence s, int start, int before, int count) {
+<span class="fc bfc" id="L395" title="All 2 branches covered.">                 if (!s.toString().equals(current)) {</span>
+<span class="fc" id="L396">                     String clean = s.toString().replaceAll(&quot;[^\\d.]&quot;, &quot;&quot;);</span>
+<span class="fc" id="L397">                     String cleanC = current.replaceAll(&quot;[^\\d.]&quot;, &quot;&quot;);</span>
+
+<span class="fc" id="L399">                     int cl = clean.length();</span>
+<span class="fc" id="L400">                     int sel = cl;</span>
+<span class="pc bpc" id="L401" title="1 of 4 branches missed.">                     for (int i = 2; i &lt;= cl &amp;&amp; i &lt; 6; i += 2) {</span>
+<span class="fc" id="L402">                         sel++;</span>
+                     }
+                     //Fix for pressing delete next to a forward slash
+<span class="pc bpc" id="L405" title="1 of 2 branches missed.">                     if (clean.equals(cleanC)) sel--;</span>
+
+<span class="pc bpc" id="L407" title="1 of 2 branches missed.">                     if (clean.length() &lt; 8) {</span>
+<span class="nc" id="L408">                         clean = clean + mmddyyyy.substring(clean.length());</span>
+                     } else {
+                         //This part makes sure that when we finish entering numbers
+                         //the date is correct, fixing it otherwise
+<span class="fc" id="L412">                         int month = Integer.parseInt(clean.substring(0, 2));</span>
+<span class="fc" id="L413">                         int day = Integer.parseInt(clean.substring(2, 4));</span>
+<span class="fc" id="L414">                         int year = Integer.parseInt(clean.substring(4, 8));</span>
+
+<span class="pc bpc" id="L416" title="2 of 4 branches missed.">                         month = month &lt; 1 ? 1 : month &gt; 12 ? 12 : month;</span>
+<span class="fc" id="L417">                         Calendar cal = Calendar.getInstance();</span>
+<span class="fc" id="L418">                         cal.set(Calendar.MONTH, month - 1);</span>
+<span class="pc bpc" id="L419" title="2 of 4 branches missed.">                         year = (year &lt; 1900) ? 1900 : (year &gt; cal.get(Calendar.YEAR)) ? cal.get(Calendar.YEAR) : year;</span>
+<span class="fc" id="L420">                         cal.set(Calendar.YEAR, year);</span>
+<span class="pc bpc" id="L421" title="1 of 2 branches missed.">                         day = (day &gt; cal.getActualMaximum(Calendar.DATE)) ? cal.getActualMaximum(Calendar.DATE) : day;</span>
+<span class="fc" id="L422">                         clean = String.format(&quot;%02d%02d%02d&quot;, month, day, year);</span>
+                     }
+
+<span class="fc" id="L425">                     clean = String.format(&quot;%s/%s/%s&quot;, clean.substring(0, 2),</span>
+<span class="fc" id="L426">                             clean.substring(2, 4),</span>
+<span class="fc" id="L427">                             clean.substring(4, 8));</span>
+
+<span class="pc bpc" id="L429" title="1 of 2 branches missed.">                     sel = sel &lt; 0 ? 0 : sel;</span>
+<span class="fc" id="L430">                     current = clean;</span>
+<span class="fc" id="L431">                     dueDate.setText(current);</span>
+<span class="pc bpc" id="L432" title="1 of 2 branches missed.">                     dueDate.setSelection(sel &lt; current.length() ? sel : current.length());</span>
+                 }
+<span class="fc" id="L434">             }</span>
+
+             @Override
+<span class="fc" id="L437">             public void afterTextChanged(Editable s) {}</span>
+         });
+
+<span class="fc" id="L440">         updateButton.setOnClickListener(new View.OnClickListener() {</span>
+             @Override
+             public void onClick(View view) {
+<span class="fc" id="L443">                 addToRecycler(new Task(task.getTaskId(), task.getTaskImage(), task.getIsComplete(), taskName.getText().toString(), taskDescription.getText().toString(), dueDate.getText().toString()));</span>
+<span class="fc" id="L444">                 editDialog.dismiss();</span>
+<span class="fc" id="L445">             }</span>
+         });
+
+         //populate page with stored values
+<span class="fc" id="L449">         taskName.setText(task.getTaskName());</span>
+<span class="fc" id="L450">         SimpleDateFormat dateFormat = new SimpleDateFormat(&quot;MM/dd/yyyy&quot;);</span>
+<span class="fc" id="L451">         Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone(&quot;America/New_York&quot;));</span>
+<span class="fc" id="L452">         cDate.setText(dateFormat.format(calendar.getTime()));</span>
+<span class="fc" id="L453">         dueDate.setText(task.getTaskDate());</span>
+<span class="fc" id="L454">         taskDescription.setText(task.getTaskDescription());</span>
+
+         //start the dialog
+<span class="fc" id="L457">         editDialog.getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);</span>
+<span class="fc" id="L458">         editDialog.show();</span>
+
+<span class="fc" id="L460">     }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span>Generated by the Android Gradle plugin 7.4.0</div></body></html>

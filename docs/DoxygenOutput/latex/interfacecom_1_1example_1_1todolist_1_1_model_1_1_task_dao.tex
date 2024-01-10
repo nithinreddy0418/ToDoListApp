@@ -1,0 +1,141 @@
+\hypertarget{interfacecom_1_1example_1_1todolist_1_1_model_1_1_task_dao}{}\doxysection{com.\+example.\+todolist.\+Model.\+Task\+Dao Interface Reference}
+\label{interfacecom_1_1example_1_1todolist_1_1_model_1_1_task_dao}\index{com.example.todolist.Model.TaskDao@{com.example.todolist.Model.TaskDao}}
+
+
+Data Access Object used to access the local database.  
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+List$<$ \mbox{\hyperlink{classcom_1_1example_1_1todolist_1_1_model_1_1_task}{Task}} $>$ \mbox{\hyperlink{interfacecom_1_1example_1_1todolist_1_1_model_1_1_task_dao_a0bafe4c5020bb80385363d2cae8a3924}{get\+All}} ()
+\begin{DoxyCompactList}\small\item\em called to get a list of all the tasks stored in db \end{DoxyCompactList}\item 
+List$<$ \mbox{\hyperlink{classcom_1_1example_1_1todolist_1_1_model_1_1_task}{Task}} $>$ \mbox{\hyperlink{interfacecom_1_1example_1_1todolist_1_1_model_1_1_task_dao_a158f907d26fc7ff43e5a927472a0ae1e}{get\+Complete}} ()
+\begin{DoxyCompactList}\small\item\em called to get a list of all the tasks stored in db which are marked as complete \end{DoxyCompactList}\item 
+List$<$ \mbox{\hyperlink{classcom_1_1example_1_1todolist_1_1_model_1_1_task}{Task}} $>$ \mbox{\hyperlink{interfacecom_1_1example_1_1todolist_1_1_model_1_1_task_dao_a7ee61aec5f34a1de77256c4863d02925}{get\+Incomplete}} ()
+\begin{DoxyCompactList}\small\item\em called to get a list of all the tasks stored in db which are marked as incomplete \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{interfacecom_1_1example_1_1todolist_1_1_model_1_1_task_dao_abc3a81851a53bd0b41f68002ad35810c}{set\+Complete}} (int task\+Id)
+\begin{DoxyCompactList}\small\item\em called to change a tasks stored value for is\+Complete to 1 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{interfacecom_1_1example_1_1todolist_1_1_model_1_1_task_dao_ad1a08ad5155105063d1d7e72e168e1a5}{set\+Incomplete}} (int task\+Id)
+\begin{DoxyCompactList}\small\item\em called to change a tasks stored value for is\+Complete to 0 \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{interfacecom_1_1example_1_1todolist_1_1_model_1_1_task_dao_aa199179670f3bf12ac9702ecc0abfaab}{insert}} (\mbox{\hyperlink{classcom_1_1example_1_1todolist_1_1_model_1_1_task}{Task}} task)
+\begin{DoxyCompactList}\small\item\em called to insert a task into the db \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{interfacecom_1_1example_1_1todolist_1_1_model_1_1_task_dao_ac9c18a65aa2974a4c454d799d7e12aed}{delete}} (\mbox{\hyperlink{classcom_1_1example_1_1todolist_1_1_model_1_1_task}{Task}} task)
+\begin{DoxyCompactList}\small\item\em called to remove a task from the db \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Data Access Object used to access the local database. 
+
+\begin{DoxyAuthor}{Author}
+Jay Stewart 
+
+Bryce Mc\+Nary 
+\end{DoxyAuthor}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{interfacecom_1_1example_1_1todolist_1_1_model_1_1_task_dao_ac9c18a65aa2974a4c454d799d7e12aed}\label{interfacecom_1_1example_1_1todolist_1_1_model_1_1_task_dao_ac9c18a65aa2974a4c454d799d7e12aed}} 
+\index{com.example.todolist.Model.TaskDao@{com.example.todolist.Model.TaskDao}!delete@{delete}}
+\index{delete@{delete}!com.example.todolist.Model.TaskDao@{com.example.todolist.Model.TaskDao}}
+\doxysubsubsection{\texorpdfstring{delete()}{delete()}}
+{\footnotesize\ttfamily void com.\+example.\+todolist.\+Model.\+Task\+Dao.\+delete (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcom_1_1example_1_1todolist_1_1_model_1_1_task}{Task}}}]{task }\end{DoxyParamCaption})}
+
+
+
+called to remove a task from the db 
+
+
+\begin{DoxyParams}{Parameters}
+{\em task} & the task to be removed from the db \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{interfacecom_1_1example_1_1todolist_1_1_model_1_1_task_dao_a0bafe4c5020bb80385363d2cae8a3924}\label{interfacecom_1_1example_1_1todolist_1_1_model_1_1_task_dao_a0bafe4c5020bb80385363d2cae8a3924}} 
+\index{com.example.todolist.Model.TaskDao@{com.example.todolist.Model.TaskDao}!getAll@{getAll}}
+\index{getAll@{getAll}!com.example.todolist.Model.TaskDao@{com.example.todolist.Model.TaskDao}}
+\doxysubsubsection{\texorpdfstring{getAll()}{getAll()}}
+{\footnotesize\ttfamily List$<$ \mbox{\hyperlink{classcom_1_1example_1_1todolist_1_1_model_1_1_task}{Task}} $>$ com.\+example.\+todolist.\+Model.\+Task\+Dao.\+get\+All (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+called to get a list of all the tasks stored in db 
+
+\begin{DoxyReturn}{Returns}
+List The list of all tasks in the db 
+\end{DoxyReturn}
+\mbox{\Hypertarget{interfacecom_1_1example_1_1todolist_1_1_model_1_1_task_dao_a158f907d26fc7ff43e5a927472a0ae1e}\label{interfacecom_1_1example_1_1todolist_1_1_model_1_1_task_dao_a158f907d26fc7ff43e5a927472a0ae1e}} 
+\index{com.example.todolist.Model.TaskDao@{com.example.todolist.Model.TaskDao}!getComplete@{getComplete}}
+\index{getComplete@{getComplete}!com.example.todolist.Model.TaskDao@{com.example.todolist.Model.TaskDao}}
+\doxysubsubsection{\texorpdfstring{getComplete()}{getComplete()}}
+{\footnotesize\ttfamily List$<$ \mbox{\hyperlink{classcom_1_1example_1_1todolist_1_1_model_1_1_task}{Task}} $>$ com.\+example.\+todolist.\+Model.\+Task\+Dao.\+get\+Complete (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+called to get a list of all the tasks stored in db which are marked as complete 
+
+\begin{DoxyReturn}{Returns}
+List the list of all tasks in the db marked as complete 
+\end{DoxyReturn}
+\mbox{\Hypertarget{interfacecom_1_1example_1_1todolist_1_1_model_1_1_task_dao_a7ee61aec5f34a1de77256c4863d02925}\label{interfacecom_1_1example_1_1todolist_1_1_model_1_1_task_dao_a7ee61aec5f34a1de77256c4863d02925}} 
+\index{com.example.todolist.Model.TaskDao@{com.example.todolist.Model.TaskDao}!getIncomplete@{getIncomplete}}
+\index{getIncomplete@{getIncomplete}!com.example.todolist.Model.TaskDao@{com.example.todolist.Model.TaskDao}}
+\doxysubsubsection{\texorpdfstring{getIncomplete()}{getIncomplete()}}
+{\footnotesize\ttfamily List$<$ \mbox{\hyperlink{classcom_1_1example_1_1todolist_1_1_model_1_1_task}{Task}} $>$ com.\+example.\+todolist.\+Model.\+Task\+Dao.\+get\+Incomplete (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+called to get a list of all the tasks stored in db which are marked as incomplete 
+
+\begin{DoxyReturn}{Returns}
+List the list of all tasks in the db marked as incomplete 
+\end{DoxyReturn}
+\mbox{\Hypertarget{interfacecom_1_1example_1_1todolist_1_1_model_1_1_task_dao_aa199179670f3bf12ac9702ecc0abfaab}\label{interfacecom_1_1example_1_1todolist_1_1_model_1_1_task_dao_aa199179670f3bf12ac9702ecc0abfaab}} 
+\index{com.example.todolist.Model.TaskDao@{com.example.todolist.Model.TaskDao}!insert@{insert}}
+\index{insert@{insert}!com.example.todolist.Model.TaskDao@{com.example.todolist.Model.TaskDao}}
+\doxysubsubsection{\texorpdfstring{insert()}{insert()}}
+{\footnotesize\ttfamily void com.\+example.\+todolist.\+Model.\+Task\+Dao.\+insert (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classcom_1_1example_1_1todolist_1_1_model_1_1_task}{Task}}}]{task }\end{DoxyParamCaption})}
+
+
+
+called to insert a task into the db 
+
+
+\begin{DoxyParams}{Parameters}
+{\em task} & the task to be inserted into the db \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{interfacecom_1_1example_1_1todolist_1_1_model_1_1_task_dao_abc3a81851a53bd0b41f68002ad35810c}\label{interfacecom_1_1example_1_1todolist_1_1_model_1_1_task_dao_abc3a81851a53bd0b41f68002ad35810c}} 
+\index{com.example.todolist.Model.TaskDao@{com.example.todolist.Model.TaskDao}!setComplete@{setComplete}}
+\index{setComplete@{setComplete}!com.example.todolist.Model.TaskDao@{com.example.todolist.Model.TaskDao}}
+\doxysubsubsection{\texorpdfstring{setComplete()}{setComplete()}}
+{\footnotesize\ttfamily void com.\+example.\+todolist.\+Model.\+Task\+Dao.\+set\+Complete (\begin{DoxyParamCaption}\item[{int}]{task\+Id }\end{DoxyParamCaption})}
+
+
+
+called to change a tasks stored value for is\+Complete to 1 
+
+
+\begin{DoxyParams}{Parameters}
+{\em task\+Id} & the id of the task to be modified \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{interfacecom_1_1example_1_1todolist_1_1_model_1_1_task_dao_ad1a08ad5155105063d1d7e72e168e1a5}\label{interfacecom_1_1example_1_1todolist_1_1_model_1_1_task_dao_ad1a08ad5155105063d1d7e72e168e1a5}} 
+\index{com.example.todolist.Model.TaskDao@{com.example.todolist.Model.TaskDao}!setIncomplete@{setIncomplete}}
+\index{setIncomplete@{setIncomplete}!com.example.todolist.Model.TaskDao@{com.example.todolist.Model.TaskDao}}
+\doxysubsubsection{\texorpdfstring{setIncomplete()}{setIncomplete()}}
+{\footnotesize\ttfamily void com.\+example.\+todolist.\+Model.\+Task\+Dao.\+set\+Incomplete (\begin{DoxyParamCaption}\item[{int}]{task\+Id }\end{DoxyParamCaption})}
+
+
+
+called to change a tasks stored value for is\+Complete to 0 
+
+
+\begin{DoxyParams}{Parameters}
+{\em task\+Id} & the id of the task to be modified \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this interface was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+main/java/com/example/todolist/\+Model/Task\+Dao.\+java\end{DoxyCompactItemize}

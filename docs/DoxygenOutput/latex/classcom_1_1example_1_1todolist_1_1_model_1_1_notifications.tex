@@ -1,0 +1,123 @@
+\hypertarget{classcom_1_1example_1_1todolist_1_1_model_1_1_notifications}{}\doxysection{com.\+example.\+todolist.\+Model.\+Notifications Class Reference}
+\label{classcom_1_1example_1_1todolist_1_1_model_1_1_notifications}\index{com.example.todolist.Model.Notifications@{com.example.todolist.Model.Notifications}}
+
+
+Class to create and schedule push notifications.  
+
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1todolist_1_1_model_1_1_notifications_ad76a813d90b62013ff5ab1371d67bf66}{create\+Notification\+Channel}} (Context context)
+\begin{DoxyCompactList}\small\item\em Creates notification channel to post push notifications. \end{DoxyCompactList}\item 
+Notification \mbox{\hyperlink{classcom_1_1example_1_1todolist_1_1_model_1_1_notifications_a2bde17f449acbc5c184d394ca33f6dea}{create\+Notification}} (String title, String content, int image, Context context)
+\begin{DoxyCompactList}\small\item\em Creates a notification object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1todolist_1_1_model_1_1_notifications_a27a025cc7500712bbef3c2cca97e26d9}{schedule\+Notification}} (Notification notification, Calendar calendar, Context context)
+\begin{DoxyCompactList}\small\item\em Schedule a notification to be sent at a specific time. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classcom_1_1example_1_1todolist_1_1_model_1_1_notifications_a8962a1b2dc38c77d96a45b4500389e07}{schedule\+Repeating\+Notification}} (Notification notification, Calendar calendar, Calendar repeat\+Interval, Context context)
+\begin{DoxyCompactList}\small\item\em Schedule a notification to be sent at a specific time and repeat at specific intervals. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class to create and schedule push notifications. 
+
+\begin{DoxyAuthor}{Author}
+Jay Stewart 
+\end{DoxyAuthor}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classcom_1_1example_1_1todolist_1_1_model_1_1_notifications_a2bde17f449acbc5c184d394ca33f6dea}\label{classcom_1_1example_1_1todolist_1_1_model_1_1_notifications_a2bde17f449acbc5c184d394ca33f6dea}} 
+\index{com.example.todolist.Model.Notifications@{com.example.todolist.Model.Notifications}!createNotification@{createNotification}}
+\index{createNotification@{createNotification}!com.example.todolist.Model.Notifications@{com.example.todolist.Model.Notifications}}
+\doxysubsubsection{\texorpdfstring{createNotification()}{createNotification()}}
+{\footnotesize\ttfamily Notification com.\+example.\+todolist.\+Model.\+Notifications.\+create\+Notification (\begin{DoxyParamCaption}\item[{String}]{title,  }\item[{String}]{content,  }\item[{int}]{image,  }\item[{Context}]{context }\end{DoxyParamCaption})}
+
+
+
+Creates a notification object. 
+
+\begin{DoxyAuthor}{Author}
+Jay Stewart 
+\end{DoxyAuthor}
+
+\begin{DoxyParams}{Parameters}
+{\em title} & title of the notification \\
+\hline
+{\em content} & the content / description of the notification \\
+\hline
+{\em image} & image to display with the notification \\
+\hline
+{\em context} & the context of the super class calling this method \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Notification 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classcom_1_1example_1_1todolist_1_1_model_1_1_notifications_ad76a813d90b62013ff5ab1371d67bf66}\label{classcom_1_1example_1_1todolist_1_1_model_1_1_notifications_ad76a813d90b62013ff5ab1371d67bf66}} 
+\index{com.example.todolist.Model.Notifications@{com.example.todolist.Model.Notifications}!createNotificationChannel@{createNotificationChannel}}
+\index{createNotificationChannel@{createNotificationChannel}!com.example.todolist.Model.Notifications@{com.example.todolist.Model.Notifications}}
+\doxysubsubsection{\texorpdfstring{createNotificationChannel()}{createNotificationChannel()}}
+{\footnotesize\ttfamily void com.\+example.\+todolist.\+Model.\+Notifications.\+create\+Notification\+Channel (\begin{DoxyParamCaption}\item[{Context}]{context }\end{DoxyParamCaption})}
+
+
+
+Creates notification channel to post push notifications. 
+
+Required by Android 8 and up \begin{DoxyAuthor}{Author}
+Jay Stewart 
+\end{DoxyAuthor}
+
+\begin{DoxyParams}{Parameters}
+{\em context} & the context of the super class calling this method \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcom_1_1example_1_1todolist_1_1_model_1_1_notifications_a27a025cc7500712bbef3c2cca97e26d9}\label{classcom_1_1example_1_1todolist_1_1_model_1_1_notifications_a27a025cc7500712bbef3c2cca97e26d9}} 
+\index{com.example.todolist.Model.Notifications@{com.example.todolist.Model.Notifications}!scheduleNotification@{scheduleNotification}}
+\index{scheduleNotification@{scheduleNotification}!com.example.todolist.Model.Notifications@{com.example.todolist.Model.Notifications}}
+\doxysubsubsection{\texorpdfstring{scheduleNotification()}{scheduleNotification()}}
+{\footnotesize\ttfamily void com.\+example.\+todolist.\+Model.\+Notifications.\+schedule\+Notification (\begin{DoxyParamCaption}\item[{Notification}]{notification,  }\item[{Calendar}]{calendar,  }\item[{Context}]{context }\end{DoxyParamCaption})}
+
+
+
+Schedule a notification to be sent at a specific time. 
+
+\begin{DoxyAuthor}{Author}
+Jay Stewart 
+\end{DoxyAuthor}
+
+\begin{DoxyParams}{Parameters}
+{\em notification} & the notification object to schedule \\
+\hline
+{\em calendar} & the time to schedule the notification \\
+\hline
+{\em context} & the context of the super class calling this method \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classcom_1_1example_1_1todolist_1_1_model_1_1_notifications_a8962a1b2dc38c77d96a45b4500389e07}\label{classcom_1_1example_1_1todolist_1_1_model_1_1_notifications_a8962a1b2dc38c77d96a45b4500389e07}} 
+\index{com.example.todolist.Model.Notifications@{com.example.todolist.Model.Notifications}!scheduleRepeatingNotification@{scheduleRepeatingNotification}}
+\index{scheduleRepeatingNotification@{scheduleRepeatingNotification}!com.example.todolist.Model.Notifications@{com.example.todolist.Model.Notifications}}
+\doxysubsubsection{\texorpdfstring{scheduleRepeatingNotification()}{scheduleRepeatingNotification()}}
+{\footnotesize\ttfamily void com.\+example.\+todolist.\+Model.\+Notifications.\+schedule\+Repeating\+Notification (\begin{DoxyParamCaption}\item[{Notification}]{notification,  }\item[{Calendar}]{calendar,  }\item[{Calendar}]{repeat\+Interval,  }\item[{Context}]{context }\end{DoxyParamCaption})}
+
+
+
+Schedule a notification to be sent at a specific time and repeat at specific intervals. 
+
+\begin{DoxyAuthor}{Author}
+Jay Stewart 
+\end{DoxyAuthor}
+
+\begin{DoxyParams}{Parameters}
+{\em notification} & the notification object to schedule \\
+\hline
+{\em calendar} & the time to schedule the notification \\
+\hline
+{\em context} & the context of the super class calling this method \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+main/java/com/example/todolist/\+Model/Notifications.\+java\end{DoxyCompactItemize}

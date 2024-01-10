@@ -1,0 +1,47 @@
+<resources>
+    <string name="app_name">ToDoList</string>
+    <string name="nav_header_title">To Do List</string>
+    <string name="nav_header_subtitle">your.email@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_completed">Completed</string>
+
+    <string name="fragment_home_noTask">No Tasks</string>
+    <string name="fragment_home_snackbar_msg">Marked As Complete</string>
+
+    <string name="fragment_completed_noTask">No Completed Tasks</string>
+
+    <string name="bottom_sheet_header">Choose</string>
+    <string name="bottom_sheet_edit">Edit</string>
+    <string name="bottom_sheet_delete">Delete</string>
+    <string name="bottom_sheet_markComplete">Mark As Complete</string>
+
+    <string name="completed_bottom_sheet_delete">Delete</string>
+    <string name="completed_bottom_sheet_markIncomplete">Mark As Incomplete</string>
+
+    <string name="delete_dialog_contentDesc">Trashcan</string>
+    <string name="delete_dialog_delete">Delete</string>
+    <string name="delete_dialog_cancel">Cancel</string>
+    <string name="delete_dialog_ays">Are You Sure?</string>
+    <string name="delete_dialog_msg">Do you really want to delete this task? This process cannot be undone.</string>
+
+    <string name="bottom_sheet_notif">Create Notification</string>
+
+
+    <!-- Settings   -->
+    <string name="title_activity_settings">Settings</string>
+    <string name="key_font">fontSize</string>
+    <string-array name="font_names">
+        <item>Small</item>
+        <item>Medium</item>
+        <item>Large</item>
+    </string-array>
+    <string-array name="font_values">
+        <item>20</item>
+        <item>25</item>
+        <item>30</item>
+    </string-array>
+
+</resources>

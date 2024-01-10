@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MainActivity.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=0;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">debug</a> &gt; <a href="index.source.html" class="el_package">com.example.todolist</a> &gt; <span class="el_source">MainActivity.java</span></div><h1>MainActivity.java</h1><pre class="source lang-java linenums">package com.example.todolist;
+
+import android.app.DatePickerDialog;
+
+import android.app.Dialog;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.InputFilter;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+import android.view.View;
+import android.text.TextWatcher;
+import android.text.method.DigitsKeyListener;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.Menu;
+import android.widget.Button;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.text.ParseException;
+
+import android.text.Spanned;
+import android.view.KeyEvent;
+import android.widget.EditText;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.PopupWindow;
+
+import com.example.todolist.Model.AppDatabase;
+import com.example.todolist.Model.Task;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.example.todolist.Model.ui.settings.SettingsActivity;
+
+import com.example.todolist.Model.Task;
+
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.navigation.NavigationView;
+
+
+import androidx.annotation.NonNull;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
+import androidx.room.Room;
+
+import com.example.todolist.databinding.ActivityMainBinding;
+
+import java.util.List;
+import java.util.TimeZone;
+
+/**
+ * The Main activity for the application.
+ * &lt;p&gt;This is the first Screen the user sees&lt;/p&gt;
+ *
+ * @author Jay Stewart, Bryce McNary, Marwa Qureshi, Alyana Barrera, Austin Hwang
+ * @version 1.0
+ * @see &lt;a href=&quot;https://github.com/WSU-DGscheidle/spring23_project-go-team&quot;&gt;Visit this project's GitHub repository&lt;/a&gt;
+ */
+<span class="fc" id="L73">public class MainActivity extends AppCompatActivity {</span>
+
+    private AppBarConfiguration mAppBarConfiguration;
+
+    private ActivityMainBinding binding;
+    public static AppDatabase db;
+
+    public static SharedPreferences spf;
+
+
+    /**
+     * called on initial creation of the activity. Perform initialization of all fragments.
+     * @param savedInstanceState
+     */
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+<span class="fc" id="L89">        super.onCreate(savedInstanceState);</span>
+
+<span class="fc" id="L91">        spf = PreferenceManager.getDefaultSharedPreferences(this);</span>
+
+<span class="fc" id="L93">        db = Room.databaseBuilder(getApplicationContext(),</span>
+<span class="fc" id="L94">                AppDatabase.class, &quot;tasks-db&quot;).allowMainThreadQueries().build();</span>
+
+<span class="fc" id="L96">        binding = ActivityMainBinding.inflate(getLayoutInflater());</span>
+<span class="fc" id="L97">        setContentView(binding.getRoot());</span>
+
+<span class="fc" id="L99">        setSupportActionBar(binding.appBarMain.toolbar);</span>
+<span class="fc" id="L100">        binding.appBarMain.btnAddItem.setOnClickListener(new View.OnClickListener() {</span>
+            @Override
+            public void onClick(View view) {
+<span class="fc" id="L103">                ConstraintLayout popupWindow = findViewById(R.id.popup_window);</span>
+<span class="fc" id="L104">                FloatingActionButton btnAddItem = findViewById(R.id.btnAddItem);</span>
+                //the btnAddItem floating action button will disappear once pop-up window opens
+<span class="fc" id="L106">                btnAddItem.setVisibility(View.GONE);</span>
+<span class="fc" id="L107">                popupWindow.setVisibility(View.VISIBLE);</span>
+<span class="fc" id="L108">            }</span>
+        });
+
+
+        //Return to Main Screen when cancel button is clicked
+<span class="fc" id="L113">        Button cancelButton = findViewById(R.id.cancelButton);</span>
+<span class="fc" id="L114">        cancelButton.setOnClickListener(new View.OnClickListener() {</span>
+            @Override
+            public void onClick(View v) {
+                // Create an intent to return to the main activity
+<span class="nc" id="L118">                Intent intent = new Intent(MainActivity.this, MainActivity.class);</span>
+<span class="nc" id="L119">                startActivity(intent);</span>
+<span class="nc" id="L120">            }</span>
+        });
+
+
+
+        //This will by default display today's date which is editable
+<span class="fc" id="L126">        EditText editText = findViewById(R.id.current_date);</span>
+<span class="fc" id="L127">        SimpleDateFormat dateFormat = new SimpleDateFormat(&quot;MM/dd/yyyy&quot;);</span>
+<span class="fc" id="L128">        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone(&quot;America/New_York&quot;));</span>
+<span class="fc" id="L129">        editText.setText(dateFormat.format(calendar.getTime()));</span>
+
+        // Disable EditText when it gains focus
+<span class="fc" id="L132">        editText.setOnFocusChangeListener(new View.OnFocusChangeListener() {</span>
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+<span class="nc bnc" id="L135" title="All 2 branches missed.">                if (hasFocus) {</span>
+<span class="nc" id="L136">                    editText.setEnabled(false);</span>
+                }
+<span class="nc" id="L138">            }</span>
+        });
+
+        // Set up the due date format and restriction
+<span class="fc" id="L142">        EditText dueDateEditText = findViewById(R.id.due_date);</span>
+<span class="fc" id="L143">        final SimpleDateFormat simpleDateFormat = new SimpleDateFormat(&quot;MM/dd/yyyy&quot;);</span>
+
+<span class="fc" id="L145">        dueDateEditText.addTextChangedListener(new TextWatcher() {</span>
+<span class="fc" id="L146">            private String current = &quot;&quot;;</span>
+<span class="fc" id="L147">            private String mmddyyyy = &quot;MMDDYYYY&quot;;</span>
+
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+<span class="fc" id="L151">            }</span>
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+                // Get current year
+<span class="fc" id="L157">                int currentYear = 0;</span>
+<span class="pc bpc" id="L158" title="1 of 2 branches missed.">                if (android.os.Build.VERSION.SDK_INT &gt;= android.os.Build.VERSION_CODES.O) {</span>
+<span class="fc" id="L159">                    currentYear = LocalDate.now().getYear();</span>
+                }
+
+<span class="fc bfc" id="L162" title="All 2 branches covered.">                if (!s.toString().equals(current)) {</span>
+<span class="fc" id="L163">                    String clean = s.toString().replaceAll(&quot;[^\\d.]&quot;, &quot;&quot;);</span>
+<span class="fc" id="L164">                    String cleanC = current.replaceAll(&quot;[^\\d.]&quot;, &quot;&quot;);</span>
+
+<span class="fc" id="L166">                    int cl = clean.length();</span>
+<span class="fc" id="L167">                    int sel = cl;</span>
+<span class="pc bpc" id="L168" title="1 of 4 branches missed.">                    for (int i = 2; i &lt;= cl &amp;&amp; i &lt; 6; i += 2) {</span>
+<span class="fc" id="L169">                        sel++;</span>
+                    }
+                    //Fix for pressing delete next to a forward slash
+<span class="pc bpc" id="L172" title="1 of 2 branches missed.">                    if (clean.equals(cleanC)) sel--;</span>
+
+<span class="pc bpc" id="L174" title="1 of 2 branches missed.">                    if (clean.length() &lt; 8) {</span>
+<span class="nc" id="L175">                        clean = clean + mmddyyyy.substring(clean.length());</span>
+                    } else {
+                        //This part makes sure that when we finish entering numbers
+                        //the date is correct, fixing it otherwise
+<span class="fc" id="L179">                        int month = Integer.parseInt(clean.substring(0, 2));</span>
+<span class="fc" id="L180">                        int day = Integer.parseInt(clean.substring(2, 4));</span>
+<span class="fc" id="L181">                        int year = Integer.parseInt(clean.substring(4, 8));</span>
+
+<span class="pc bpc" id="L183" title="2 of 4 branches missed.">                        month = month &lt; 1 ? 1 : month &gt; 12 ? 12 : month;</span>
+<span class="fc" id="L184">                        Calendar cal = Calendar.getInstance();</span>
+<span class="fc" id="L185">                        cal.set(Calendar.MONTH, month - 1);</span>
+
+                        //The line of code below sets minimum year to current year and max year of due date as next year
+                        //This auto-corrects when year is for example, 1800 or 2028
+<span class="pc bpc" id="L189" title="2 of 4 branches missed.">                        year = (year &lt; currentYear) ? currentYear : (year &gt; cal.get(Calendar.YEAR) + 1) ? cal.get(Calendar.YEAR) + 1 : year;</span>
+
+<span class="fc" id="L191">                        cal.set(Calendar.YEAR, year);</span>
+<span class="pc bpc" id="L192" title="1 of 2 branches missed.">                        day = (day &gt; cal.getActualMaximum(Calendar.DATE)) ? cal.getActualMaximum(Calendar.DATE) : day;</span>
+<span class="fc" id="L193">                        clean = String.format(&quot;%02d%02d%02d&quot;, month, day, year);</span>
+                    }
+
+<span class="fc" id="L196">                    clean = String.format(&quot;%s/%s/%s&quot;, clean.substring(0, 2),</span>
+<span class="fc" id="L197">                            clean.substring(2, 4),</span>
+<span class="fc" id="L198">                            clean.substring(4, 8));</span>
+
+<span class="pc bpc" id="L200" title="1 of 2 branches missed.">                    sel = sel &lt; 0 ? 0 : sel;</span>
+<span class="fc" id="L201">                    current = clean;</span>
+<span class="fc" id="L202">                    dueDateEditText.setText(current);</span>
+<span class="pc bpc" id="L203" title="1 of 2 branches missed.">                    dueDateEditText.setSelection(sel &lt; current.length() ? sel : current.length());</span>
+                }
+<span class="fc" id="L205">            }</span>
+
+            @Override
+            public void afterTextChanged(Editable s) {
+<span class="fc" id="L209">            }</span>
+        });
+
+<span class="fc" id="L212">        EditText taskName = findViewById(R.id.task_name);</span>
+<span class="fc" id="L213">        EditText description = findViewById(R.id.description_task);</span>
+
+<span class="fc" id="L215">        final Button addTaskBtn = findViewById(R.id.add_task_button);</span>
+<span class="fc" id="L216">        addTaskBtn.setOnClickListener(new View.OnClickListener() {</span>
+            @Override
+            public void onClick(View view) {
+<span class="fc" id="L219">                createTask(taskName.getText().toString(),</span>
+<span class="fc" id="L220">                        description.getText().toString(),</span>
+<span class="fc" id="L221">                        dueDateEditText.getText().toString());</span>
+<span class="fc" id="L222">                Intent intent = new Intent(MainActivity.this, MainActivity.class);</span>
+<span class="fc" id="L223">                startActivity(intent);</span>
+<span class="fc" id="L224">            }});</span>
+
+
+
+<span class="fc" id="L228">                DrawerLayout drawer = binding.drawerLayout;</span>
+<span class="fc" id="L229">        NavigationView navigationView = binding.navView;</span>
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+<span class="fc" id="L232">        mAppBarConfiguration = new AppBarConfiguration.Builder(</span>
+                R.id.nav_home, R.id.nav_complete)
+<span class="fc" id="L234">                .setOpenableLayout(drawer)</span>
+<span class="fc" id="L235">                .build();</span>
+<span class="fc" id="L236">        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);</span>
+<span class="fc" id="L237">        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);</span>
+<span class="fc" id="L238">        NavigationUI.setupWithNavController(navigationView, navController);</span>
+<span class="fc" id="L239">    }</span>
+
+    /**
+     * called when the activity returns to the foreground
+     */
+    @Override
+    protected void onStart() {
+<span class="fc" id="L246">        super.onStart();</span>
+<span class="fc" id="L247">    }</span>
+
+    private void createTask(String taskName, String description, String dueDate) {
+<span class="pc bpc" id="L250" title="1 of 2 branches missed.">        if (!(taskName.isEmpty()) &amp;&amp;</span>
+<span class="pc bpc" id="L251" title="1 of 2 branches missed.">                !(description.isEmpty()) &amp;&amp;</span>
+<span class="pc bpc" id="L252" title="1 of 2 branches missed.">                !(dueDate.isEmpty())) {</span>
+
+<span class="fc" id="L254">            db.taskDao().insert(new Task(getNextPrimaryKey(),</span>
+                    R.drawable.baseline_priority_high_24, false,
+                    taskName,
+                    description,
+                    dueDate));
+        }
+<span class="fc" id="L260">    }</span>
+
+    /**
+     * inflates the menu
+     * @param menu
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+<span class="fc" id="L269">        getMenuInflater().inflate(R.menu.main, menu);</span>
+<span class="fc" id="L270">        return true;</span>
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+<span class="pc bpc" id="L275" title="1 of 2 branches missed.">        if (item.getItemId() == R.id.settings_navigation) {</span>
+<span class="nc" id="L276">            Intent intent = new Intent(this, SettingsActivity.class);</span>
+<span class="nc" id="L277">            startActivity(intent);</span>
+<span class="nc" id="L278">            return true;</span>
+        }
+
+<span class="fc" id="L281">        return super.onOptionsItemSelected(item);</span>
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+<span class="fc" id="L286">        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);</span>
+<span class="pc bpc" id="L287" title="1 of 2 branches missed.">        return NavigationUI.navigateUp(navController, mAppBarConfiguration)</span>
+<span class="pc bnc" id="L288" title="All 2 branches missed.">                || super.onSupportNavigateUp();</span>
+    }
+
+    public AppDatabase getDb() {
+<span class="nc" id="L292">        return db;</span>
+    }
+
+    /**
+     * Retrieves the smallest primary Key not in use by the database
+     * @return primaryKey a primary key value not in use by the database
+     */
+    private int getNextPrimaryKey(){
+<span class="fc" id="L300">        int primaryKey = 1;</span>
+<span class="fc bfc" id="L301" title="All 2 branches covered.">        for (Task task: db.taskDao().getAll()) {</span>
+<span class="pc bpc" id="L302" title="1 of 2 branches missed.">            if (primaryKey != task.getTaskId()){</span>
+<span class="nc" id="L303">                return primaryKey;</span>
+            }
+<span class="fc" id="L305">            else primaryKey += 1;</span>
+<span class="fc" id="L306">        }</span>
+<span class="fc" id="L307">        return primaryKey;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span>Generated by the Android Gradle plugin 7.4.0</div></body></html>

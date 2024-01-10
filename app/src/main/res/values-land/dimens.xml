@@ -1,0 +1,3 @@
+<resources>
+    <dimen name="btnAddItem_margin">48dp</dimen>
+</resources>
