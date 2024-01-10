@@ -80,9 +80,7 @@ The ToDoList app is designed to help you keep track of your tasks and manage you
 - Database: Room Database for local storage.
 - Language: Java.
 - User Interface: ConstraintLayout for responsiveness.
-### Future Enhancements
-Cloud integration for data synchronization across devices.
-Collaborative features for team task management.
+
 Contribution
 Contributions are welcome! Follow these steps:
 
@@ -92,10 +90,5 @@ Make your changes and submit a pull request.
 License
 This project is licensed under the MIT License - see the LICENSE file for details.
 
-### Acknowledgments
-Thanks to OpenAI for providing valuable language model capabilities.
-Special thanks to the Android developer community for inspiration and support
 
-
-Remember to replace placeholders like `your-username` and update the content based on your project specifics. This template provides users with information on features, installation, usage, technical details, contribution guidelines, license, and acknowledgments.
 
